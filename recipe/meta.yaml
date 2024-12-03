@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/youtube-to-anki-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/youtube-to-anki-{{ version }}.tar.gz
   sha256: 3491769992ca9f2dbce76b0105c47f153a57c84b4fa92d0dffe538abab212bdf
 
 build:
-  number: 0
+  number: 1
   noarch: python
   entry_points:
     - youtube-to-anki = youtube_to_anki.main:main
@@ -20,13 +20,13 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.8,<4.0
+    - python {{ python_min }}
     - poetry-core >=1.0,<2.0
   run:
     - click >=7.1,<8.0
     - genanki >=0.10,<0.11
     - pydub >=0.25,<0.26
-    - python >=3.8,<4.0
+    - python >={{ python_min }},<4.0
     - youtube-dl ==2021.04.07
     - youtube-transcript-api >=0.4.1,<0.5
     - ffmpeg >=4.3.1,<5.0
@@ -40,6 +40,7 @@ test:
     - youtube-to-anki --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://pypi.org/project/youtube-to-anki/
